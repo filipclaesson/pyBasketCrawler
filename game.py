@@ -3,44 +3,32 @@ class Game(object):
         self.homeName = homeName
         self.awayName = awayName
 
-    def setHomeResult(self, total, quarters):
-        self.homeResult = Result(total, quarters)
+    def setResult(self, total, quarters):
+        self.result = Result(total, quarters)
 
-    def setAwayResult(self, total, quarters):
-        self.awayResult = Result(total, quarters)
+    def getResult(self):
+        return self.result
 
     def write(self):
         print(self.homeName + " vs " + self.awayName)
-        print(str(self.homeResult.getScore()) + " " + str(self.awayResult.getScore()))
+        #print(str(self.homeResult.getScore()) + " " + str(self.awayResult.getScore()))
         print(self.homeResult.quarters)
         print(self.awayResult.quarters)
+
 
 class Result(object):
     def __init__(self, score, quarters):
         self.score = score
         self.quarters = quarters
 
-    def setScore(self, score):
-        self.score = score
-
     def getScore(self):
         return self.score
 
-    def getQ1(self):
-        return self.quarters[0]
+    def getScoreQuarters(self, q=0):
+        if (q == 0):
+            return self.quarters
+        else:
+            return [self.quarters[0][q-1], self.quarters[1][q-1]] 
 
-    def getQ2(self):
-        return self.quarters[1]
-
-    def getQ3(self):
-        return self.quarters[2]
-
-    def getQ4(self):
-        return self.quarters[3]
-
-
-
-
-
-
-   
+    def getHalftimeScore(self):
+        return [self.quarters[0][0]+self.quarters[0][1], self.quarters[1][0] + self.quarters[1][1]]

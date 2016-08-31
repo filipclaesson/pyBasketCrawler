@@ -3,7 +3,8 @@ from PyQt4.QtGui import *
 from PyQt4.QtCore import *  
 from PyQt4.QtWebKit import * 
 from lxml import html 
-import dataHandler as dataHandler
+import gameScraper as gs
+
 
 #Take this class for granted.Just use result of rendering.
 class Render(QWebPage):  
@@ -19,15 +20,22 @@ class Render(QWebPage):
     self.app.quit()  
 
 # matchinfo
-url = 'file:///Users/Filip/Desktop/Programmering/Webbprogrammering/Webcrawler/pyBasketCrawler/Basketligan%20Herr%20_%20SBBF.htm#stf'
+baseUrl = 'file:///Users/Filip/Desktop/Programmering/Webbprogrammering/Webcrawler/pyBasketCrawler/Basketligan%20Herr%20_%20SBBF.htm#stf'
 # sammanställning
-#url = 'file:///Users/Filip/Desktop/Programmering/Webbprogrammering/Webcrawler/pyBasketCrawler/Basketligan%20Herr%20_%20SBBF.htm#mbt:11-400$t&0=1'  
+statsUrl = 'file:///Users/Filip/Desktop/Programmering/Webbprogrammering/Webcrawler/pyBasketCrawler/Basketligan%20Herr%20_%20SBBF.htm#mbt:11-400$t&0=1'  
 # BASE INFO
-r = Render(url)  
-result = r.frame.toHtml()
-page = html.fromstring(result)
+#url ='http://basketliganherr.se/game/1054532/#stf'
 
-dataHandler.handleData(page)
+basePage = gs.getPageFromUrl(baseUrl)
+statsPage = gs.getPageFromUrl(statsUrl)
+
+game = gs.getBasicGameInfo(basePage)
+game = gs.getGameStats(statsPage, game)
+
+
+#game.write()
+
+
 
 ''' STATS
 table = page.find_class('mbt-table mbt-complex')
