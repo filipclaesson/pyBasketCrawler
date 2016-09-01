@@ -4,6 +4,7 @@ from PyQt4.QtCore import *
 from PyQt4.QtWebKit import * 
 from lxml import html 
 import gameScraper as gs
+import game as game
 
 
 #Take this class for granted.Just use result of rendering.
@@ -20,21 +21,31 @@ class Render(QWebPage):
     self.app.quit()  
 
 # matchinfo
-baseUrl = 'file:///Users/Filip/Desktop/Programmering/Webbprogrammering/Webcrawler/pyBasketCrawler/Basketligan%20Herr%20_%20SBBF.htm#stf'
-# sammanställning
+#url = 'file:///Users/Filip/Desktop/Programmering/Webbprogrammering/Webcrawler/pyBasketCrawler/Basketligan%20Herr%20_%20SBBF.htm#stf'
+# basePage = gs.getPageFromUrl(url)
+# game = gs.getBasicGameInfo(basePage)
+
+
 statsUrl = 'file:///Users/Filip/Desktop/Programmering/Webbprogrammering/Webcrawler/pyBasketCrawler/Basketligan%20Herr%20_%20SBBF.htm#mbt:11-400$t&0=1'  
+statsPage = gs.getPageFromUrl(statsUrl)
+game = gs.getGameStats(statsPage)
 # BASE INFO
 #url ='http://basketliganherr.se/game/1054532/#stf'
 
-basePage = gs.getPageFromUrl(baseUrl)
-statsPage = gs.getPageFromUrl(statsUrl)
-
-game = gs.getBasicGameInfo(basePage)
-game = gs.getGameStats(statsPage, game)
 
 
-#game.write()
 
+
+#statsPage = gs.getPageFromUrl(statsUrl)
+
+
+
+# g1 = game.Game("Södertälje", "Plannja")
+# g1.setResult([68, 73], [[12, 14, 25, 17], [16, 20, 18, 19]])
+#game = gs.getGameStats(statsPage, game)
+
+
+game.write()
 
 
 ''' STATS

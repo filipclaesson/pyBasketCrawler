@@ -12,8 +12,10 @@ class Game(object):
     def write(self):
         print(self.homeName + " vs " + self.awayName)
         #print(str(self.homeResult.getScore()) + " " + str(self.awayResult.getScore()))
-        print(self.homeResult.quarters)
-        print(self.awayResult.quarters)
+        print(self.result.getScore())
+        print(self.result.getScoreQuarters())
+
+
 
 
 class Result(object):
@@ -32,3 +34,26 @@ class Result(object):
 
     def getHalftimeScore(self):
         return [self.quarters[0][0]+self.quarters[0][1], self.quarters[1][0] + self.quarters[1][1]]
+
+class StatRow(object):
+    def __init__(self):
+        self.val = ""
+        
+        def setStat(self, row):
+            self.row = row
+
+        def write(self):
+            print(self.row)
+
+
+
+
+
+
+
+
+
+
+
+
+
